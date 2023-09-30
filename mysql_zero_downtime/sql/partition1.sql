@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS Person_new (
+    id varchar(36) NOT NULL,
+    name varchar(255),
+    email varchar(255),
+    phone varchar(31),
+    address varchar(255),
+    city varchar(127),
+    zip_code varchar(15),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ID, zip_code) -- Make sure to include zip_code in the primary key
+)
+PARTITION BY RANGE COLUMNS(zip_code) (
+    PARTITION p0 VALUES LESS THAN ('10000'),
+    PARTITION p1 VALUES LESS THAN ('20000'),
+    PARTITION p2 VALUES LESS THAN ('30000'),
+    PARTITION p3 VALUES LESS THAN ('40000'),
+    PARTITION p4 VALUES LESS THAN ('50000'),
+    PARTITION p5 VALUES LESS THAN ('60000'),
+    PARTITION p6 VALUES LESS THAN ('70000'),
+    PARTITION p7 VALUES LESS THAN ('80000'),
+    PARTITION p8 VALUES LESS THAN ('90000'),
+    PARTITION p9 VALUES LESS THAN (MAXVALUE)
+);
