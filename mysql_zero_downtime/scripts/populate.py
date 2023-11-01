@@ -18,6 +18,7 @@ fake = Faker()
 
 
 db_host = os.environ.get('MYSQL_HOST', 'localhost')
+db_port = os.environ.get('MYSQL_PORT', '3306')
 db_name = os.environ.get('MYSQL_DATABASE')
 db_user = os.environ.get('MYSQL_ROOT_USER', 'root')
 db_pass = os.environ.get('MYSQL_ROOT_PASSWORD')
@@ -39,9 +40,15 @@ db_pass = os.environ.get('MYSQL_ROOT_PASSWORD')
 def populate(interval: int = 0):
 
     conn = None
+    print("Connecting to MySQL...")
+    print("host: %s" % db_host)
+    print("database: %s" % db_name)
+    print("user: %s" % db_user)
+    print("password: %s" % db_pass)
     try:
         conn = mysql.connector.connect(
             host=db_host,
+            port=db_port,
             database=db_name,
             user=db_user,
             password=db_pass
